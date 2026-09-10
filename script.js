@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBox = document.getElementById('modalBox');
   const modalTitle = document.getElementById('modalTitle');
   const modalText = document.getElementById('modalText');
+  const modalNote = document.getElementById('modalNote');
   const modalInputWrap = document.getElementById('modalInputWrap');
   const modalInput = document.getElementById('modalInput');
   const modalButton = document.getElementById('modalButton');
+  const discordValidationNote = document.getElementById('discordValidationNote');
 
   const DISCORD_ID_KEY = 'blackmoon_discord_identity';
   const SUBMISSION_KEY = 'blackmoon_application_submitted';
@@ -36,6 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const hasSubmittedBefore = () => localStorage.getItem(getSubmissionKey()) === 'true';
 
+  const hideDiscordValidationNote = () => {
+    if (discordValidationNote) {
+      discordValidationNote.classList.remove('visible');
+    }
+  };
+
+  const showDiscordValidationNote = () => {
+    if (discordValidationNote) {
+      discordValidationNote.classList.add('visible');
+    }
+  };
+
   const openModal = (type, title, text) => {
     modalBox.classList.remove('modal--error', 'modal--success');
     modalBox.classList.add(type === 'success' ? 'modal--success' : 'modal--error');
@@ -43,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = title;
     modalText.textContent = text;
     modalInputWrap.classList.remove('visible');
+    modalInput.classList.remove('input-invalid');
+    modalNote.classList.remove('visible');
     modalButton.textContent = 'OK';
     modalOverlay.classList.remove('hidden');
     modalOverlay.classList.add('visible');
@@ -52,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.classList.remove('visible');
     modalOverlay.classList.add('hidden');
     modalInputWrap.classList.remove('visible');
+    modalInput.classList.remove('input-invalid');
+    modalNote.classList.remove('visible');
     modalButton.textContent = 'OK';
     modalInput.value = '';
   };
@@ -61,8 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = 'Logowanie przez Discord';
     modalText.textContent = 'Wpisz swoje ID Discord, aby przejść dalej.';
     modalInputWrap.classList.add('visible');
+    modalInput.classList.remove('input-invalid');
     modalInput.value = currentDiscordIdentity || '';
     modalInput.placeholder = 'Wpisz tylko ID konta Discord';
+    modalNote.textContent = 'Aby zaakceptować, wpisz poprawne ID Discord.';
+    modalNote.classList.add('visible');
     modalButton.textContent = 'OK';
     modalOverlay.classList.remove('hidden');
     modalOverlay.classList.add('visible');
@@ -257,16 +278,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const typedIdentity = modalInput.value.trim();
 
       if (!typedIdentity || typedIdentity.length < 18) {
-        openModal(
-          'error',
-          'Błędne ID Discord',
-          'Wprowadzone ID Discord jest nieprawidłowe.'
-        );
+        modalText.textContent = 'Wprowadzone ID Discord jest nieprawidłowe.';
+        modalTitle.textContent = 'Błędne ID Discord';
+        modalNote.textContent = 'Aby zaakceptować, wpisz poprawne ID Discord.';
+        modalNote.classList.add('visible');
+        modalInput.classList.add('input-invalid');
+        showDiscordValidationNote();
+        modalInput.focus();
         return;
       }
 
       currentDiscordIdentity = typedIdentity;
       localStorage.setItem(DISCORD_ID_KEY, typedIdentity);
+      hideDiscordValidationNote();
       closeModal();
       handleDiscordLogin();
       return;
