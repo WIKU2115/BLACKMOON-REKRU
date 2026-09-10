@@ -21,6 +21,19 @@
         </div>
       </header>
 
+      <div class="discord-login" id="discordLoginBlock">
+        <div class="discord-login__content">
+          <div class="discord-login__info">
+            <span class="discord-login__badge">Logowanie przez Discord</span>
+            <p>Kliknij poniżej, aby zalogować się przez Discord i przejść dalej.</p>
+          </div>
+
+          <div class="discord-login__controls">
+            <button type="button" id="discordLoginButton">ZALOGUJ PRZEZ DISCORD</button>
+          </div>
+        </div>
+      </div>
+
       <div class="consent-banner" id="consentBanner">
         <div class="consent-banner__content">
           <div class="consent-banner__info">
@@ -29,8 +42,8 @@
           </div>
 
           <div class="consent-banner__controls">
-            <button type="button" class="consent-accept" id="consentAccept">AKCEPTUJĘ</button>
-            <button type="button" class="consent-decline" id="consentDecline">ODRZUĆ</button>
+            <button type="button" class="consent-accept" id="consentAccept" disabled>AKCEPTUJĘ</button>
+            <button type="button" class="consent-decline" id="consentDecline" disabled>ODRZUĆ</button>
           </div>
         </div>
       </div>
@@ -179,6 +192,12 @@
         <div class="modal-icon" id="modalIcon">!</div>
         <h3 id="modalTitle">Uwaga</h3>
         <p id="modalText">Wypełnij wszystkie pola.</p>
+
+        <div class="modal-input-wrap" id="modalInputWrap">
+          <label for="modalInput">ID Discord</label>
+          <input id="modalInput" type="text" placeholder="Wpisz tylko ID konta Discord" />
+        </div>
+
         <button type="button" class="modal-button" id="modalButton">OK</button>
       </div>
     </div>

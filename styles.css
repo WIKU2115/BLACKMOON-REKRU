@@ -264,6 +264,87 @@ textarea {
   padding-top: 4px;
 }
 
+.discord-login {
+  margin-bottom: 22px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(126, 203, 255, 0.26);
+  background: linear-gradient(135deg, rgba(126, 203, 255, 0.12), rgba(255,255,255,0.03));
+  box-shadow: var(--shadow);
+}
+
+.discord-login__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.discord-login__info {
+  flex: 1 1 420px;
+}
+
+.discord-login__badge {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(126, 203, 255, 0.14);
+  border: 1px solid rgba(126, 203, 255, 0.25);
+  color: #bfe9ff;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.discord-login__info p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.discord-login__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.discord-login__controls input {
+  min-width: min(100%, 280px);
+}
+
+.discord-login__controls button,
+button[type="button"].consent-accept,
+button[type="button"].consent-decline {
+  border: 1px solid rgba(126, 203, 255, 0.35);
+  border-radius: 14px;
+  background: rgba(126, 203, 255, 0.08);
+  color: var(--text);
+  padding: 14px 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.discord-login__controls button:hover,
+button[type="button"].consent-accept:hover,
+button[type="button"].consent-decline:hover {
+  transform: translateY(-1px);
+}
+
+.discord-login__controls button:disabled,
+button[type="button"].consent-accept:disabled,
+button[type="button"].consent-decline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .consent-banner {
   margin-bottom: 22px;
   padding: 18px 20px;
@@ -497,6 +578,37 @@ button[type="button"].consent-accept.is-confirmed {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.modal-input-wrap {
+  display: none;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.modal-input-wrap.visible {
+  display: block;
+}
+
+.modal-input-wrap label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.modal-input-wrap input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 12px 14px;
+}
+
+.modal-input-wrap input:focus {
+  outline: none;
+  border-color: rgba(126, 203, 255, 0.5);
 }
 
 .modal-button {
