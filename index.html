@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLACKMOON — Podanie na mechanika</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="consent-locked">
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="BlackMoon logo">
+          <div class="brand-mark">B</div>
+          <span>BLACKMOON</span>
+        </div>
+      </header>
+
+      <div class="consent-banner" id="consentBanner">
+        <div class="consent-banner__content">
+          <div class="consent-banner__info">
+            <span class="consent-badge">Zgoda na przetwarzanie danych</span>
+            <p>Wyrażam zgodę na przetwarzanie moich danych osobowych w celu udziału w rekrutacji.</p>
+          </div>
+
+          <div class="consent-banner__controls">
+            <button type="button" class="consent-accept" id="consentAccept">AKCEPTUJĘ</button>
+            <button type="button" class="consent-decline" id="consentDecline">ODRZUĆ</button>
+          </div>
+        </div>
+      </div>
+
+      <main class="main-content">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">REKRUTACJA MECHANIKÓW</p>
+            <h1>OTWIERAMY STANOWISKA</h1>
+            <p class="subtitle">
+              Szukamy ludzi, którzy znają się na robocie. Wypełnij formularz — podanie trafi
+              prosto na kanał rekrutacyjny do szefostwa BlackMoon.
+            </p>
+          </div>
+
+          <div class="hero-visual">
+            <div class="logo-card">
+              <img
+                src="https://i.imgur.com/ym3MP7O.jpeg"
+                alt="BlackMoon Repair"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <div class="section-head">
+            <h2>PODANIE NA MECHANIKA</h2>
+          </div>
+
+          <form class="application-form">
+            <div class="panel">
+              <h3>DANE KANDYDATA</h3>
+              <div class="field-grid two-columns">
+                <label>
+                  <span>Imię i nazwisko</span>
+                  <input type="text" name="name" placeholder="IC" />
+                </label>
+                <label>
+                  <span>Wiek</span>
+                  <input type="text" name="age" placeholder="IC" />
+                </label>
+                <label>
+                  <span>Discord</span>
+                  <input type="text" name="discord" placeholder="NAZWA + ID DC" />
+                </label>
+                <label>
+                  <span>Telefon</span>
+                  <input type="text" name="phone" placeholder="IC" />
+                </label>
+                <label class="full-width">
+                  <span>Zamieszkały</span>
+                  <input type="text" name="residence" placeholder="IC" />
+                </label>
+                <label class="full-width">
+                  <span>Doświadczenie? (w miesiącach)</span>
+                  <input type="text" name="experience_months" placeholder="IC" />
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>KOMPETENCJE</h3>
+              <div class="field-grid">
+                <label class="full-width">
+                  <span>Od kiedy możesz rozpocząć pracę?</span>
+                  <input type="text" name="start_date" placeholder="IC" />
+                </label>
+                <label class="full-width">
+                  <span>Doświadczenie (co robisz na co dzień na mieście)</span>
+                  <textarea name="daily_work" rows="4" placeholder="IC"></textarea>
+                </label>
+                <label class="full-width">
+                  <span>Dlaczego chcesz dołączyć do naszego zespołu?</span>
+                  <textarea name="join_reason" rows="5" placeholder="IC"></textarea>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>PYTANIA OGÓLNE</h3>
+              <div class="questions-list">
+                <label>
+                  <span>1. Dlaczego chcesz pracować jako mechanik?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>2. Jakie masz doświadczenie przy naprawie samochodów lub innych pojazdów?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>3. Jakie podstawowe narzędzia mechaniczne znasz i potrafisz obsługiwać?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>4. Ile czasu jesteś w stanie poświęcić tygodniowo na pracę?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>5. Jak spisujesz się w pracy zespołowej oraz jak reagujesz na stres i presję?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>SCENARIUSZE I PROCEDURY</h3>
+              <div class="questions-list">
+                <label>
+                  <span>1. W warsztacie pojawia się klient, który uważa, że usługa powinna być wykonana za darmo — jak reagujesz?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>2. Zauważasz, że jeden z pracowników wykorzystuje nieodpowiednie procedury podczas naprawy — co robisz?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>3. Przyjeżdża na warsztat osoba, która zaczyna cię poniżać po czym prosi o naprawienie pojazdu — jak powinieneś postąpić?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>4. Przyjeżdża osoba zamaskowana truckerem bądź samochodem kradzionym — jakie powinny być twoje procedury?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+                <label>
+                  <span>5. Osoba na mechaniku mówi, że jest pracownikiem zakładu, z którym mamy współpracę, ale nie ma zapisanego imienia i nazwiska w bazie — co robisz?</span>
+                  <textarea rows="3" placeholder="IC"></textarea>
+                </label>
+              </div>
+            </div>
+
+            <div class="submit-wrap">
+              <button type="submit" id="submitButton" disabled>WYŚLIJ PODANIE</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>BLACKMOON · PODANIA IDĄ NA DISCORD REKRUTACJI</span>
+      </footer>
+    </div>
+
+    <div class="modal-overlay hidden" id="formModal" aria-live="polite">
+      <div class="modal" id="modalBox">
+        <div class="modal-icon" id="modalIcon">!</div>
+        <h3 id="modalTitle">Uwaga</h3>
+        <p id="modalText">Wypełnij wszystkie pola.</p>
+        <button type="button" class="modal-button" id="modalButton">OK</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
