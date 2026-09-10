@@ -159,7 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (consentDecline) {
-    consentDecline.addEventListener('click', () => setConsentState(false));
+    consentDecline.addEventListener('click', () => {
+      setConsentState(false);
+      window.location.href = 'https://www.google.com';
+    });
   }
 
   modalButton.addEventListener('click', closeModal);
