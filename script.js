@@ -223,10 +223,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        errorText || 'Nie udało się wysłać podania. Spróbuj ponownie później.'
-      );
+      const contentType = response.headers.get('content-type') || '';
+      let errorText = '';
+
+      try {
+        errorText = await response.text();
+      } catch {
+        errorText = '';
+      }
+
+      const sanitizedErrorText = errorText
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      let friendlyMessage = 'Nie udało się wysłać podania. Spróbuj ponownie później.';
+
+      if (contentType.includes('application/json')) {
+        try {
+          const parsed = JSON.parse(errorText);
+          if (parsed?.message) {
+            friendlyMessage = parsed.message;
+          }
+        } catch {
+          // Ignorujemy nieparsowalne JSON i pozostajemy przy domyślnej wiadomości.
+        }
+      }
+
+      if (response.status === 404) {
+        friendlyMessage = 'Endpoint nie został znaleziony. Sprawdź konfigurację backendu.';
+      } else if (response.status === 405) {
+        friendlyMessage = 'Endpoint nie obsługuje tej metody. Sprawdź konfigurację backendu.';
+      } else if (response.status === 500) {
+        friendlyMessage = 'Serwer zwrócił błąd wewnętrzny. Spróbuj ponownie później.';
+      } else if (sanitizedErrorText) {
+        friendlyMessage = sanitizedErrorText;
+      }
+
+      throw new Error(friendlyMessage);
     }
   };
 
