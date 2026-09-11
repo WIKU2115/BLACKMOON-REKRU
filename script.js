@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1542637486491172914/4GSB1lCzN73U8TfQsXkIPnDnn1Xt9-c4Iz81VUX-7ArsFzxZbtLyNY-E2JYmRcSOWtuM';
+  const config = window.BLACKMOON_CONFIG || {};
+  const submitEndpoint = config.submitEndpoint || '/api/submit';
   const DISCORD_CLIENT_ID = 'TU_WSTAW_CLIENT_ID';
   const DISCORD_REDIRECT_URI = 'http://localhost:8000';
   const DISCORD_SCOPE = 'identify';
@@ -213,11 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const sendToDiscord = async (entries) => {
-    if (!DISCORD_WEBHOOK_URL) {
-      throw new Error('Brakuje adresu webhook Discord. Wstaw poprawny URL w zmiennej DISCORD_WEBHOOK_URL.');
-    }
-
-    const response = await fetch(DISCORD_WEBHOOK_URL, {
+    const response = await fetch(submitEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -227,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Discord webhook zwrócił błąd ${response.status}${errorText ? `: ${errorText}` : ''}`);
+      throw new Error(`Błąd wysyłki ${response.status}${errorText ? `: ${errorText}` : ''}`);
     }
   };
 
