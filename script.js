@@ -251,11 +251,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (response.status === 404) {
-        friendlyMessage = 'Endpoint nie został znaleziony. Sprawdź konfigurację backendu.';
+        friendlyMessage = 'Nie udało się połączyć z serwerem. Spróbuj ponownie później.';
       } else if (response.status === 405) {
-        friendlyMessage = 'Endpoint nie obsługuje tej metody. Sprawdź konfigurację backendu.';
+        friendlyMessage = 'Nie udało się wysłać podania. Spróbuj ponownie później.';
       } else if (response.status === 500) {
-        friendlyMessage = 'Serwer zwrócił błąd wewnętrzny. Spróbuj ponownie później.';
+        friendlyMessage = 'Serwer tymczasowo nie odpowiada. Spróbuj ponownie później.';
       } else if (sanitizedErrorText) {
         friendlyMessage = sanitizedErrorText;
       }
