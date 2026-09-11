@@ -1,12 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const config = window.BLACKMOON_CONFIG || {};
   const submitEndpoint = config.submitEndpoint || '/api/submit';
-  const DISCORD_CLIENT_ID = 'TU_WSTAW_CLIENT_ID';
-  const DISCORD_REDIRECT_URI = 'http://localhost:8000';
-  const DISCORD_SCOPE = 'identify';
-  const DISCORD_OAUTH_URL = DISCORD_CLIENT_ID && DISCORD_CLIENT_ID !== 'TU_WSTAW_CLIENT_ID'
-    ? `https://discord.com/oauth2/authorize?client_id=${encodeURIComponent(DISCORD_CLIENT_ID)}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI)}&response_type=code&scope=${encodeURIComponent(DISCORD_SCOPE)}`
-    : null;
 
   const form = document.querySelector('.application-form');
   const consentBanner = document.getElementById('consentBanner');
@@ -214,17 +208,25 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const sendToDiscord = async (entries) => {
-    const response = await fetch(submitEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(buildDiscordPayload(entries)),
-    });
+    let response;
+
+    try {
+      response = await fetch(submitEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(buildDiscordPayload(entries)),
+      });
+    } catch {
+      throw new Error('Nie udało się połączyć z serwerem. Sprawdź konfigurację endpointu.');
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Błąd wysyłki ${response.status}${errorText ? `: ${errorText}` : ''}`);
+      throw new Error(
+        errorText || 'Nie udało się wysłać podania. Spróbuj ponownie później.'
+      );
     }
   };
 
@@ -250,11 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (discordLoginButton) {
     discordLoginButton.addEventListener('click', () => {
-      if (DISCORD_OAUTH_URL) {
-        window.location.href = DISCORD_OAUTH_URL;
-        return;
-      }
-
       openDiscordLoginModal();
     });
   }
@@ -374,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal(
           'error',
           'Błąd wysyłki',
-          error.message || 'Nie udało się wysłać podania do Discorda.'
+          error.message || 'Nie udało się wysłać podania. Spróbuj ponownie później.'
         );
       } finally {
         if (submitButton) {
