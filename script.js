@@ -2,14 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const config = window.BLACKMOON_CONFIG || {};
 
   const getDirectDiscordWebhookUrl = () => {
-    const encodedUrl = config.discordWebhookUrl || '';
+    const rawValue = config.discordWebhookUrl || '';
 
-    if (!encodedUrl) {
+    if (!rawValue) {
       return '';
     }
 
+    if (/^https?:\/\//i.test(rawValue)) {
+      return rawValue;
+    }
+
     try {
-      return atob(encodedUrl);
+      const decodedValue = atob(rawValue);
+      return /^https?:\/\//i.test(decodedValue) ? decodedValue : '';
     } catch {
       return '';
     }
