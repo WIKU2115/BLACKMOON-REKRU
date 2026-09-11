@@ -1,6 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   const config = window.BLACKMOON_CONFIG || {};
-  const submitEndpoint = config.submitEndpoint || '/api/submit';
+
+  const getDirectDiscordWebhookUrl = () => {
+    const encodedUrl = config.discordWebhookUrl || '';
+
+    if (!encodedUrl) {
+      return '';
+    }
+
+    try {
+      return atob(encodedUrl);
+    } catch {
+      return '';
+    }
+  };
 
   const form = document.querySelector('.application-form');
   const consentBanner = document.getElementById('consentBanner');
@@ -208,10 +221,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const sendToDiscord = async (entries) => {
+    const targetUrl = getDirectDiscordWebhookUrl();
+
+    if (!targetUrl) {
+      throw new Error('Brak skonfigurowanego webhooka Discord.');
+    }
+
     let response;
 
     try {
-      response = await fetch(submitEndpoint, {
+      response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -219,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(buildDiscordPayload(entries)),
       });
     } catch {
-      throw new Error('Nie udało się połączyć z serwerem. Sprawdź konfigurację endpointu.');
+      throw new Error('Nie udało się połączyć z Discord webhook.');
     }
 
     if (!response.ok) {
